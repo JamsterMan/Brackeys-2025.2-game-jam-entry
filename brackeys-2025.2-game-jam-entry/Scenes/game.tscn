@@ -14,9 +14,12 @@ size = Vector2(23, 22)
 script = ExtResource("1_cta16")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_vloc4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_u3bi5")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-704, -79)
+texture = ExtResource("2_vloc4")
