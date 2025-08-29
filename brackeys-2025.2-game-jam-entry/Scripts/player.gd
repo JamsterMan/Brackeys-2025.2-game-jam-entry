@@ -11,10 +11,8 @@ func _physics_process(delta: float):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("WALK") :
-		print("walking")
 		walking = true
 	if event.is_action_released("WALK") :
-		print("stop walking")
 		walking = false
 
 func _move_player():
@@ -33,7 +31,5 @@ func _move_player():
 	move_and_slide()
 
 func _rotate_player():
-	print(player_direction)
-	print(player_direction.angle())
 	sprite.rotation = player_direction.angle() + deg_to_rad(-90)
 	
