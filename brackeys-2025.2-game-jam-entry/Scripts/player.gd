@@ -1,42 +1,39 @@
 extends CharacterBody2D
 
-@export var speed: int = 200 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+@export var speed: int = 300
+@export var walk_speed: int = 150
+@export var sprite: Sprite2D
+var player_direction: Vector2
+var walking: bool = false
 
 func _physics_process(delta: float):
-	move_and_slide()
+	_move_player()
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed("UP")):
-		print("up")
-		velocity += speed * Vector2.UP
-	elif (event.is_action_pressed("DOWN")):
-		print("down")
-		velocity += speed * Vector2.DOWN
-	elif(event.is_action_pressed("LEFT")):
-		print("left")
-		velocity += speed * Vector2.LEFT
-	elif(event.is_action_pressed("RIGHT")):
-		print("right")
-		velocity += speed * Vector2.RIGHT
+	if event.is_action_pressed("WALK") :
+		print("walking")
+		walking = true
+	if event.is_action_released("WALK") :
+		print("stop walking")
+		walking = false
+
+func _move_player():
+	# Get the input direction and handle the movement/deceleration.
+	player_direction.x = Input.get_axis("LEFT", "RIGHT")
+	player_direction.y = Input.get_axis("UP", "DOWN")
+	if player_direction:
+		if walking:
+			velocity = player_direction * walk_speed
+		else:
+			velocity = player_direction * speed
+		_rotate_player()
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.y = move_toward(velocity.y, 0, speed)
+	move_and_slide()
+
+func _rotate_player():
+	print(player_direction)
+	print(player_direction.angle())
+	sprite.rotation = player_direction.angle() + deg_to_rad(-90)
 	
-	if(event.is_action_released("UP")):
-		print("up")
-		velocity -= speed * Vector2.UP
-	elif (event.is_action_released("DOWN")):
-		print("down")
-		velocity -= speed * Vector2.DOWN
-	elif(event.is_action_released("LEFT")):
-		print("left")
-		velocity -= speed * Vector2.LEFT
-	elif(event.is_action_released("RIGHT")):
-		print("right")
-		velocity -= speed * Vector2.RIGHT
