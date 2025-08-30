@@ -12,18 +12,17 @@ func _physics_process(delta: float):
 
 func _check_if_player_is_visable():
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(position, player.position)
-	query.exclude = [self]
-	var result = space_state.intersect_ray(query)
-	if result:
-		if result["collider"].name == "Player" :
+	var ray_query = PhysicsRayQueryParameters2D.create(position, player.position)
+	ray_query.exclude = [self]
+	var ray_result = space_state.intersect_ray(ray_query)
+	if ray_result:
+		if ray_result["collider"].name == "Player" :
 			print("Player seen : Game Over")
 			#open lose screen
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	check_player_visablity = true
-
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	check_player_visablity = false
