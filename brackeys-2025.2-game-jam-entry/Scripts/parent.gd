@@ -1,8 +1,11 @@
 extends PathFollow2D
 
 @export var move_speed: float = 3
-@export var player: CharacterBody2D
+var player: CharacterBody2D
 var check_player_visablity: bool = false
+
+func _ready() -> void:
+	player = get_node("../../Player")
 
 func _physics_process(delta: float):
 	#progress_ratio += 0.002

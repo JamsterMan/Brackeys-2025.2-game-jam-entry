@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://65ntg2bwiwtw"]
+
+[ext_resource type="Script" path="res://Scripts/toy_trap.gd" id="1_rbjfh"]
+[ext_resource type="Texture2D" uid="uid://baf6bdt3hhorv" path="res://Art/Player.png" id="2_hiass"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wentl"]
+
+[node name="ToyTrap" type="Node2D"]
+position = Vector2(610, -290)
+script = ExtResource("1_rbjfh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 4)
+texture = ExtResource("2_hiass")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.49106, 1.36618)
+shape = SubResource("RectangleShape2D_wentl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

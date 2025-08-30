@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://br1ika1akj2ax"]
+
+[ext_resource type="Script" path="res://Scripts/gate_and_key.gd" id="1_6osh0"]
+[ext_resource type="Texture2D" uid="uid://baf6bdt3hhorv" path="res://Art/Player.png" id="2_8jd8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2fed"]
+size = Vector2(127, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5h1b"]
+
+[node name="GateAndKey" type="Node2D"]
+script = ExtResource("1_6osh0")
+
+[node name="Gate" type="Node2D" parent="."]
+position = Vector2(643, -21)
+
+[node name="Sprite2D" type="Sprite2D" parent="Gate"]
+scale = Vector2(6, 6)
+texture = ExtResource("2_8jd8h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Gate"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate/StaticBody2D"]
+position = Vector2(-2.5, 5)
+shape = SubResource("RectangleShape2D_b2fed")
+
+[node name="Key" type="Node2D" parent="."]
+position = Vector2(739, -418)
+
+[node name="Sprite2D" type="Sprite2D" parent="Key"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_8jd8h")
+
+[node name="Area2D" type="Area2D" parent="Key"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Area2D"]
+scale = Vector2(2.82115, 1)
+shape = SubResource("RectangleShape2D_w5h1b")
+
+[connection signal="body_entered" from="Key/Area2D" to="." method="_on_area_2d_body_entered"]
