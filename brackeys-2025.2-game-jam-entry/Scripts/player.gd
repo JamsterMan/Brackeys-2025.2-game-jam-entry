@@ -40,5 +40,5 @@ func _can_run(run:bool):
 	can_run = run
 
 func _rotate_player():
-	sprite.rotation = player_direction.angle() + deg_to_rad(-90)
+	rotation = player_direction.angle() + deg_to_rad(-90)
 	

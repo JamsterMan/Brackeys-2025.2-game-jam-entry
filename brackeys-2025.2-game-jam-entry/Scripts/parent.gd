@@ -15,9 +15,10 @@ func _check_if_player_is_visable():
 	var query = PhysicsRayQueryParameters2D.create(position, player.position)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
-	if result["collider"].name == "Player" :
-		print("Player seen : Game Over")
-		#open lose screen
+	if result:
+		if result["collider"].name == "Player" :
+			print("Player seen : Game Over")
+			#open lose screen
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
