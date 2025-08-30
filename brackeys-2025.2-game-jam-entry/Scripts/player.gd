@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var sprite: Sprite2D
 var player_direction: Vector2
 var walking: bool = false
+var can_run: bool = true
 
 func _physics_process(delta: float):
 	_move_player()
@@ -23,12 +24,20 @@ func _move_player():
 		if walking:
 			velocity = player_direction * walk_speed
 		else:
-			velocity = player_direction * speed
+			if can_run:
+				velocity = player_direction * speed
+			else:
+				print("Player ran : game over")
+				velocity = Vector2.ZERO
+				#game over screen
 		_rotate_player()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
 	move_and_slide()
+
+func _can_run(run:bool):
+	can_run = run
 
 func _rotate_player():
 	sprite.rotation = player_direction.angle() + deg_to_rad(-90)
