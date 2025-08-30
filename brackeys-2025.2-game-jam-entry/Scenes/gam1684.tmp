@@ -34,6 +34,7 @@ tile_set = ExtResource("4_2e4u1")
 [node name="ParentPath" parent="." instance=ExtResource("3_nodb8")]
 
 [node name="ParentPath2" parent="." instance=ExtResource("3_nodb8")]
+process_mode = 4
 curve = SubResource("Curve2D_6kbvi")
 
 [node name="Biscuit" parent="." instance=ExtResource("4_baiac")]

@@ -18,11 +18,11 @@ size = Vector2(9.57476, 20)
 [node name="ParentPath" type="Path2D"]
 curve = SubResource("Curve2D_oiboj")
 
-[node name="Parent" type="PathFollow2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Parent" type="PathFollow2D" parent="." node_paths=PackedStringArray("polygon")]
 position = Vector2(-60, -200)
 rotation = 1.5708
 script = ExtResource("1_gr0jh")
-player = NodePath("")
+polygon = NodePath("Polygon2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Parent"]
 rotation = -1.5708
@@ -47,5 +47,14 @@ position = Vector2(1.48409, 0)
 scale = Vector2(1.24, 3.88)
 shape = SubResource("RectangleShape2D_ly6x2")
 
+[node name="Polygon2D" type="Polygon2D" parent="Parent"]
+color = Color(0.68, 0.0544, 0.0544, 0.392157)
+polygon = PackedVector2Array(-25, 45, -25, -45, 1600, -45, 1600, 45)
+
+[node name="Timer" type="Timer" parent="Parent"]
+wait_time = 0.05
+autostart = true
+
 [connection signal="body_entered" from="Parent/Area2D" to="Parent" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Parent/Area2D" to="Parent" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Parent/Timer" to="Parent" method="_on_timer_timeout"]
